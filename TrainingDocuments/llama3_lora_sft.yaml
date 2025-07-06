@@ -1,0 +1,13 @@
+### Note: DO NOT use quantized model or quantization_bit when merging LoRA adapters
+
+### model
+model_name_or_path: /cpfs01/projects-HDD/cfff-0082a359858b_HDD/sxc_22300240012/LLaMA-Factory/output/qwen2_7b_common_medical_nazi_jingjian_cot_sft # 你的基础模型路径
+adapter_name_or_path: saves/qwen2_7b_common_medical_nazi_jingjian_cot_sft_sixuan_dpo # 你的 LoRA 适配器路径
+template: default  # 改为与你训练时使用的模板一致（之前用 default 解决了 sharegpt 问题）
+trust_remote_code: true
+
+### export
+export_dir: output/qwen2_7b_common_medical_nazi_jingjian_cot_sft_sixuan_dpo  # 合并后模型的保存目录
+export_size: 5  # 导出模型的分片大小（单位: GB），根据需求调整
+export_device: cpu  # 导出设备，建议用 cpu 以避免 GPU 内存溢出
+export_legacy_format: false  # 使用新格式，兼容性更好

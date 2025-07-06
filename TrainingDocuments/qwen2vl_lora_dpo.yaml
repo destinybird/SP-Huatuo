@@ -1,0 +1,41 @@
+### model
+model_name_or_path: /cpfs01/projects-HDD/cfff-0082a359858b_HDD/sxc_22300240012/LLaMA-Factory/output/qwen2_7b_common_medical_nazi_jingjian_cot_sft
+trust_remote_code: true
+
+### method
+stage: dpo
+do_train: true
+finetuning_type: lora
+lora_rank: 8
+lora_target: all
+pref_beta: 0.3  # 从0.1调整到0.3
+pref_loss: sigmoid
+
+### dataset
+dataset: dpo_zh_demo
+template: default
+cutoff_len: 2048
+max_samples: 1000
+overwrite_cache: true
+preprocessing_num_workers: 16
+dataloader_num_workers: 4
+
+### output
+output_dir: saves/qwen2_7b_common_medical_nazi_jingjian_cot_sft_sixuan_dpo
+logging_steps: 10
+save_steps: 500
+plot_loss: true
+overwrite_output_dir: true
+save_only_model: false
+
+### train
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 16  # 从8调整到16
+learning_rate: 1.0e-5  # 从5.0e-6调整到1.0e-5
+num_train_epochs: 10.0  # 从6.0调整到10.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.05  # 从0.1调整到0.05
+bf16: true
+ddp_timeout: 180000000
+ddp_find_unused_parameters: false
+resume_from_checkpoint: null
